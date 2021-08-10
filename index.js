@@ -8,7 +8,8 @@ const PORT = 4000;
 
 //init middleware
 //app.use(logger);
-
+//body perser middleware
+app.use(express.json());
 
 app.use('/', require('./routes/routers'));
 app.use(express.static(path.join(__dirname, 'public')))

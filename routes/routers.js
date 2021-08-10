@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const users = require('../userslist/Users')
+//const bodyParser = require('body-parser')
 //const { Router } = require("express");
 
 router.get('/api/users', (req, res) =>{
@@ -17,7 +18,17 @@ router.get('/api/users/:id', (req, res)=>{
 });
 
 router.post('/api/users', (req, res)=>{
-    res.send(req.body);
+    //res.send(req.body);
+    const newUser ={
+        id : req.body.id,
+        name : req.body.name,
+        course: req.body.name
+    }
+    if(!newUser.name || !newUser.course){
+        return res.status(404).send("Please provide name & Email")
+    }
+
+    users.push(newUser);
 })
 
 router.get('/', (req, res)=>{
