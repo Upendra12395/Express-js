@@ -22,13 +22,16 @@ router.post('/api/users', (req, res)=>{
     const newUser ={
         id : req.body.id,
         name : req.body.name,
-        course: req.body.name
+        course: req.body.course
     }
     if(!newUser.name || !newUser.course){
-        return res.status(404).send("Please provide name & Email")
+        res.status(404).json({msg: "Please provide name & Email"});
+    }else{
+        users.push(newUser);
+        res.json(users);
     }
 
-    users.push(newUser);
+    
 })
 
 router.get('/', (req, res)=>{
