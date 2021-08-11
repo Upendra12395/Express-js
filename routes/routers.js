@@ -34,6 +34,26 @@ router.post('/api/users', (req, res)=>{
     
 })
 
+router.put('/api/users/:id', (req, res)=>{
+    const found = users.some(users => users.id === parseInt(req.params.id));
+    
+    if(found){
+        const newUser = req.body;
+        users.forEach(user=> {
+            if(user.id === parseInt(req.params.id)){
+                user.name = newUser.name ? newUser.name : user.name;
+                user.course = newUser.course ? newUser.course : user.course;
+            }
+            res.json({msg: 'data updated', users})
+        });
+
+        
+    }else{
+        res.status(404).send("user not found");
+    }
+    
+});
+
 router.get('/', (req, res)=>{
     res.send("hello");
 })
