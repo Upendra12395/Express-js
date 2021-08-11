@@ -54,6 +54,19 @@ router.put('/api/users/:id', (req, res)=>{
     
 });
 
+router.delete('/api/users/:id', (req, res)=>{
+    const found = users.some(users => users.id === parseInt(req.params.id));
+    
+    if(found){
+        res.json({
+            msg: "user delete",
+            users: users.filter(users => users.id != parseInt(req.params.id))});
+    }else{
+        res.status(404).send("user not found");
+    }
+    
+});
+
 router.get('/', (req, res)=>{
     res.send("hello");
 })
